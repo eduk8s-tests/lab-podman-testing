@@ -23,9 +23,20 @@ spec:
         securityContext:
           privileged: true
         volumeMounts:
+        - name: podman
+          mountPath: /var/run/containers
+          subPath: var-run-containers
+        - name: podman
+          mountPath: /var/lib/containers
+          subPath: var-lib-containers
         - name: registry
           mountPath: /var/run/registry
+      securityContext:
+        fsGroup: 0
       volumes:
+      - name: podman
+        persistentVolumeClaim:
+          claimName: $(session_namespace)-podman
       - name: registry
         configMap:
           name: $(session_namespace)-registry
@@ -33,6 +44,17 @@ spec:
           - key: config.json
             path: config.json
     objects:
+    - apiVersion: v1
+      kind: PersistentVolumeClaim
+      metadata:
+        namespace: $(workshop_namespace)
+        name: $(session_namespace)-podman
+      spec:
+        accessModes:
+        - ReadWriteOnce
+        resources:
+          requests:
+            storage: 5Gi
     - apiVersion: v1
       kind: PersistentVolumeClaim
       metadata:
