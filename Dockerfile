@@ -1,6 +1,6 @@
 FROM quay.io/eduk8s/workshop-dashboard:master
 
-SER root
+USER root
 
 RUN HOME=/root && \
     INSTALL_PKGS="buildah podman runc fuse3 slirp4netns" && \
