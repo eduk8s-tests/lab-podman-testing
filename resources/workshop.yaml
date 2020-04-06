@@ -141,3 +141,47 @@ spec:
         - hosts:
           - "*.$(ingress_domain)"
           secretName: "$(ingress_secret)"
+    - apiVersion: policy/v1beta1
+      kind: PodSecurityPolicy
+      metadata:
+        name: $(session_namespace)-podman
+      runAsUser:
+        rule: MustRunAsRange
+      seLinux:
+        rule: MustRunAs
+      fsGroup:
+        rule: MustRunAs
+      requiredDropCapabilities:
+      - KILL
+      - MKNOD
+      allowPrivilegeEscalation: true
+      allowPrivilegedContainer: true
+      volumes:
+      - configMap
+      - downwardAPI
+      - emptyDir
+      - persistentVolumeClaim
+      - projected
+      - secret
+    - apiVersion: rbac.authorization.k8s.io/v1
+      kind: ClusterRole
+      metadata:
+        name: $(session_namespace)-podman
+      rules:
+      - apiGroups: ['policy']
+        resources: ['podsecuritypolicies']
+        verbs:     ['use']
+        resourceNames:
+        - $(session_namespace)-podman
+    - apiVersion: rbac.authorization.k8s.io/v1
+      kind: ClusterRoleBinding
+      metadata:
+        name: $(session_namespace)-podman
+      roleRef:
+        apiGroup: rbac.authorization.k8s.io
+        kind: ClusterRole
+        name: $(session_namespace)-podman
+      subjects:
+      - kind: ServiceAccount
+        namespace: $(workshop_namespace)
+        name: $(service_account)
