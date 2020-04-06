@@ -1,4 +1,4 @@
-LAB - Markdown Sample
-=====================
+LAB - Podman Testing
+====================
 
-Sample workshop content using Markdown formatting for pages.
+Sample workshop for testing use of podman in a container.
