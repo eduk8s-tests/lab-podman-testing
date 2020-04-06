@@ -147,27 +147,30 @@ spec:
       kind: PodSecurityPolicy
       metadata:
         name: $(session_namespace)-podman
-      allowPrivilegeEscalation: true
-      requiredDropCapabilities:
-      - KILL
-      - MKNOD
-      hostIPC: false
-      hostNetwork: false
-      hostPID: false
-      hostPorts: []
-      runAsUser:
-        rule: MustRunAsRange
-      seLinux:
-        rule: MustRunAs
-      fsGroup:
-        rule: MustRunAs
-      volumes:
-      - configMap
-      - downwardAPI
-      - emptyDir
-      - persistentVolumeClaim
-      - projected
-      - secret
+      spec:
+        allowPrivilegeEscalation: true
+        requiredDropCapabilities:
+        - KILL
+        - MKNOD
+        hostIPC: false
+        hostNetwork: false
+        hostPID: false
+        hostPorts: []
+        runAsUser:
+          rule: MustRunAsNonRoot
+        seLinux:
+          rule: MustRunAs
+        fsGroup:
+          rule: MustRunAs
+        supplementalGroups:
+          rule: RunAsAny
+        volumes:
+        - configMap
+        - downwardAPI
+        - emptyDir
+        - persistentVolumeClaim
+        - projected
+        - secret
     - apiVersion: rbac.authorization.k8s.io/v1
       kind: ClusterRole
       metadata:
