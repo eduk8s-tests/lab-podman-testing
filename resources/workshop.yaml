@@ -20,6 +20,8 @@ spec:
     patches:
       containers:
       - name: workshop
+        securityContext:
+          privileged: true
         volumeMounts:
         - name: registry
           mountPath: /var/run/registry
@@ -145,17 +147,20 @@ spec:
       kind: PodSecurityPolicy
       metadata:
         name: $(session_namespace)-podman
+      allowPrivilegeEscalation: true
+      requiredDropCapabilities:
+      - KILL
+      - MKNOD
+      hostIPC: false
+      hostNetwork: false
+      hostPID: false
+      hostPorts: []
       runAsUser:
         rule: MustRunAsRange
       seLinux:
         rule: MustRunAs
       fsGroup:
         rule: MustRunAs
-      requiredDropCapabilities:
-      - KILL
-      - MKNOD
-      allowPrivilegeEscalation: true
-      allowPrivilegedContainer: true
       volumes:
       - configMap
       - downwardAPI
