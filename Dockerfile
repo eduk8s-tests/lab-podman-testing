@@ -18,8 +18,13 @@ RUN sed -i.bak -e 's/# *events_logger = "journald"/events_logger = "file"/' \
 
 COPY sudoers.d/ /etc/sudoers.d/
 
-ENV BUILDAH_ISOLATION=chroot
-
 USER 1001
 
+ENV BUILDAH_ISOLATION=chroot
+
+ENV REGISTRY_AUTH_FILE=/home/eduk8s/.docker/config.json
+
 COPY --chown=1001:0 . /home/eduk8s/
+
+RUN mkdir -p /home/eduk8s/.docker && \
+    chmod g+w /home/eduk8s/.docker

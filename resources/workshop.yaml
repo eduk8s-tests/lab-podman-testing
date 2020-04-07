@@ -17,16 +17,21 @@ spec:
         layout: split
       console:
         enabled: true
+    env:
+    - name: REGISTRY_HOST
+      value: $(session_namespace)-registry.$(ingress_domain)
+    - name: REGISTRY_PASSWORD
+      value: eduk8s
     patches:
       containers:
       - name: workshop
         securityContext:
           privileged: true
         volumeMounts:
-        - name: podman
-          mountPath: /var/run/containers
-          subPath: var-run-containers
-        - name: podman
+        - name: podman-run-containers
+          mountPath: /run/containers
+          subPath: run-containers
+        - name: podman-var-lib-containers
           mountPath: /var/lib/containers
           subPath: var-lib-containers
         - name: registry
@@ -34,9 +39,12 @@ spec:
       securityContext:
         fsGroup: 0
       volumes:
-      - name: podman
+      - name: podman-run-containers
         persistentVolumeClaim:
-          claimName: $(session_namespace)-podman
+          claimName: $(session_namespace)-podman-1
+      - name: podman-var-lib-containers
+        persistentVolumeClaim:
+          claimName: $(session_namespace)-podman-2
       - name: registry
         configMap:
           name: $(session_namespace)-registry
@@ -48,7 +56,18 @@ spec:
       kind: PersistentVolumeClaim
       metadata:
         namespace: $(workshop_namespace)
-        name: $(session_namespace)-podman
+        name: $(session_namespace)-podman-1
+      spec:
+        accessModes:
+        - ReadWriteOnce
+        resources:
+          requests:
+            storage: 5Gi
+    - apiVersion: v1
+      kind: PersistentVolumeClaim
+      metadata:
+        namespace: $(workshop_namespace)
+        name: $(session_namespace)-podman-2
       spec:
         accessModes:
         - ReadWriteOnce
