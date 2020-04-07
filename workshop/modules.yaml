@@ -1,12 +1,23 @@
 modules:
     workshop-overview:
         name: Workshop Overview
-        exit_sign: Setup Environment
-    setup-environment:
-        name: Setup Environment
         exit_sign: Start Workshop
-    exercises/01-sample-content:
-        name: Sample Content
+    exercises/01-pulling-an-image:
+        name: Pulling an Image
+    exercices/02-running-an-image:
+        name: Running an Image
+    exercises/03-building-an-image:
+        name: Building an Image
+    exercises/04-pushing-an-image:
+        name: Pushing an Image
+    exercises/05-deploying-an-image:
+        name: Deploying an Image
     workshop-summary:
         name: Workshop Summary
         exit_sign: Finish Workshop
+
+config:
+  vars:
+  - name: REGISTRY_HOST
+  - name: REGISTRY_AUTH_FILE
+  - name: REGISTER_PASSWORD

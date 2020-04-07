@@ -3,6 +3,9 @@ name: Podman Testing
 modules:
     activate:
     - workshop-overview
-    - setup-environment
-    - exercises/01-sample-content
+    - exercises/01-pulling-an-image
+    - exercices/02-running-an-image
+    - exercises/03-building-an-image
+    - exercises/04-pushing-an-image
+    - exercises/05-deploying-an-image
     - workshop-summary

@@ -1,0 +1,57 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: hello
+  labels:
+    app: hello
+spec:
+  replicas: 1
+  strategy:
+    type: RollingUpdate
+  selector:
+    matchLabels:
+      deployment: hello
+  template:
+    metadata:
+      labels:
+        deployment: hello
+    spec:
+      containers:
+      - name: hello
+        image: ${REGISTRY_HOST}/hello:latest
+        ports:
+        - name: 8080-tcp
+          containerPort: 8080
+          protocol: TCP
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: hello
+  labels:
+    app: hello
+spec:
+  type: ClusterIP
+  selector:
+    deployment: hello
+  ports:
+  - name: 8080-tcp
+    port: 8080
+    protocol: TCP
+    targetPort: 8080
+---
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  name: hello
+  labels:
+    app: hello
+spec:
+  rules:
+  - host: hello-${SESSION_NAMESPACE}.${INGRESS_DOMAIN}
+    http:
+      paths:
+      - backend:
+          serviceName: hello
+          servicePort: 8080
+        path: /
