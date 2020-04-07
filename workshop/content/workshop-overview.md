@@ -1,5 +1,7 @@
 This workshop provides an environment for testing support for ``podman`` under the workshop environment. In addition to ``podman``, the ``buildah`` and ``skopeo`` command line tools are available.
 
+The ``podman`` command line client is in the most part compatible with the ``docker`` command line, the same sub commands and options that you would usually use with ``docker`` can be used with ``podman``.
+
 To facilitate deployment to the Kubernetes cluster of any container images which are built, an image registry is provided for the session.
 
 The host name and credentials for the image registry are:
