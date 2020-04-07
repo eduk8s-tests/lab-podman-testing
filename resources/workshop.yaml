@@ -25,6 +25,11 @@ spec:
     patches:
       containers:
       - name: workshop
+        resources:
+          requests:
+            memory: 256Mi
+          limits:
+            memory: 768Mi
         securityContext:
           privileged: true
         volumeMounts:
