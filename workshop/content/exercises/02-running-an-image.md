@@ -1,11 +1,7 @@
-```execute
-podman run --rm -it python:3.8 bash
-```
+To test that we can run the image, run:
 
 ```execute
-date
+podman run --rm python:3.8 date
 ```
 
-```execute
-exit
-```
+The ``--rm`` option was used here, so no need to clean up the stopped container.
