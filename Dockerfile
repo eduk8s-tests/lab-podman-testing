@@ -18,9 +18,6 @@ RUN sed -i.bak -e 's/# *events_logger = "journald"/events_logger = "file"/' \
 
 RUN touch /etc/containers/nodocker
 
-RUN mkdir /run/podman && \
-    ln -s /run/podman/podman.sock /var/run/docker.sock
-
 COPY sudoers.d/ /etc/sudoers.d/
 
 USER 1001
