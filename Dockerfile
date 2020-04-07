@@ -16,6 +16,8 @@ RUN sed -i.bak -e 's/cgroup_manager = "systemd"/cgroup_manager = "cgroupfs"/' \
 RUN sed -i.bak -e 's/# *events_logger = "journald"/events_logger = "file"/' \
       /usr/share/containers/libpod.conf
 
+RUN touch /etc/containers/nodocker
+
 COPY sudoers.d/ /etc/sudoers.d/
 
 USER 1001
