@@ -3,7 +3,7 @@ FROM quay.io/eduk8s/workshop-dashboard:master
 USER root
 
 RUN HOME=/root && \
-    INSTALL_PKGS="buildah podman runc fuse3 slirp4netns" && \
+    INSTALL_PKGS="buildah podman podman-docker runc fuse3 slirp4netns" && \
     dnf -y --setopt=tsflags=nodocs install $INSTALL_PKGS && \
     dnf -y clean all --enablerepo='*'
 
