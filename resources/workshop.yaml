@@ -180,6 +180,7 @@ spec:
       metadata:
         name: $(session_namespace)-podman
       spec:
+        privileged: true
         allowPrivilegeEscalation: true
         requiredDropCapabilities:
         - KILL
