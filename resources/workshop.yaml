@@ -207,9 +207,9 @@ spec:
         runAsUser:
           rule: MustRunAsNonRoot
         seLinux:
-          rule: MustRunAs
+          rule: RunAsAny
         fsGroup:
-          rule: MustRunAs
+          rule: RunAsAny
         supplementalGroups:
           rule: RunAsAny
         volumes:
@@ -224,8 +224,11 @@ spec:
       metadata:
         name: $(workshop_namespace)-podman
       rules:
-      - apiGroups: ['policy']
-        resources: ['podsecuritypolicies']
-        verbs:     ['use']
+      - apiGroups:
+        - policy
+        resources:
+        - podsecuritypolicies
+        verbs:
+        - use
         resourceNames:
         - $(workshop_namespace)-podman
