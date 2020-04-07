@@ -16,6 +16,8 @@ spec:
       labels:
         deployment: hello
     spec:
+      imagePullSecrets:
+      - name: registry-credentials
       containers:
       - name: hello
         image: ${REGISTRY_HOST}/hello:latest

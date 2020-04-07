@@ -3,6 +3,10 @@ cd exercises
 ```
 
 ```execute-1
+ls -las
+```
+
+```execute-1
 podman build -t hello .
 ```
 

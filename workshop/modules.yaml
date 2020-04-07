@@ -4,7 +4,7 @@ modules:
         exit_sign: Start Workshop
     exercises/01-pulling-an-image:
         name: Pulling an Image
-    exercices/02-running-an-image:
+    exercises/02-running-an-image:
         name: Running an Image
     exercises/03-building-an-image:
         name: Building an Image
