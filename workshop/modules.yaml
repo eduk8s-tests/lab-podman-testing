@@ -20,4 +20,5 @@ config:
   vars:
   - name: REGISTRY_HOST
   - name: REGISTRY_AUTH_FILE
+  - name: REGISTRY_USERNAME
   - name: REGISTRY_PASSWORD
