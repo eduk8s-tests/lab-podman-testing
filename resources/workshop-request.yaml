@@ -1,8 +1,0 @@
-apiVersion: training.eduk8s.io/v1alpha1
-kind: WorkshopRequest
-metadata:
-  name: lab-podman-testing
-spec:
-  environment:
-    name: lab-podman-testing
-    token: lab-podman-testing
