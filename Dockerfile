@@ -1,4 +1,4 @@
-FROM quay.io/eduk8s/workshop-dashboard:develop
+FROM quay.io/eduk8s/workshop-dashboard:master
 
 COPY etc/sudoers.d/. /etc/sudoers.d/
 
