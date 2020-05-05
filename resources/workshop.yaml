@@ -11,6 +11,7 @@ spec:
     image: quay.io/eduk8s-tests/lab-podman-testing:master
   duration: 1h
   session:
+    policy: custom
     budget: medium
     applications:
       terminal:
@@ -71,7 +72,7 @@ spec:
     - apiVersion: policy/v1beta1
       kind: PodSecurityPolicy
       metadata:
-        name: $(workshop_namespace)-podman
+        name: aaa-$(workshop_namespace)-podman
       spec:
         privileged: true
         allowPrivilegeEscalation: true
@@ -109,4 +110,4 @@ spec:
         verbs:
         - use
         resourceNames:
-        - $(workshop_namespace)-podman
+        - aaa-$(workshop_namespace)-podman
