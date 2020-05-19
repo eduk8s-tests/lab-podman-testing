@@ -6,9 +6,9 @@ To facilitate deployment to the Kubernetes cluster of any container images which
 
 The host name and credentials for the image registry are:
 
-* **Hostname**: %REGISTRY_HOST%
-* **Username**: %REGISTRY_USERNAME%
-* **Password**: %REGISTRY_PASSWORD%
+* **Hostname**: {{REGISTRY_HOST}}
+* **Username**: {{REGISTRY_USERNAME}}
+* **Password**: {{REGISTRY_PASSWORD}}
 
 Images can be pushed to the image from the terminal provided by the workshop session, or from your local computer. The ``REGISTRY_HOST``, ``REGISTRY_USERNAME`` and ``REGISTRY_USERNAME`` environment variables are set with these values if you need to use them from the terminal.
 

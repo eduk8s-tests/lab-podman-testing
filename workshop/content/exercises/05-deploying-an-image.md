@@ -21,7 +21,7 @@ kubectl rollout status deployment/hello
 Once the deployment has completed, test access to the web application by running:
 
 ```execute
-curl http://hello-%session_namespace%.%ingress_domain%
+curl http://hello-{{session_namespace}}.{{ingress_domain}}
 ```
 
 This time access to the web application is via the external ingress which was setup by the deployment.
