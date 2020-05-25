@@ -1,4 +1,4 @@
-FROM quay.io/eduk8s/base-environment:200514.313f2c5
+FROM quay.io/eduk8s/base-environment:200525.3bc34ae
 
 COPY etc/sudoers.d/. /etc/sudoers.d/
 
